@@ -18,9 +18,9 @@ const ProductCard = ({ producto, agregarAlCarrito }) => {
                     {producto.description.slice(0, 100)}...
                 </Card.Text>
                 <Card.Text>
-                    <strong>${product.price}</strong>
+                    <strong>${producto.price}</strong>
                 </Card.Text>
-                <Button variant="primary" onClick={() => agregarAlCarrito(product)}>
+                <Button style = {{backgroundColor: "#333D29" }} onClick={() => agregarAlCarrito(producto)}>
                     Agregar al carrito
                 </Button>
             </Card.Body>

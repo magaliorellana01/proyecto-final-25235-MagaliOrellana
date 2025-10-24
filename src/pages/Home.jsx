@@ -1,5 +1,5 @@
 import React from "react";
-import ListaProductos from "./ListaProductos";
+import ListaProductos from "../components/ListaProductos";
 
 export default function Home () {
     return (

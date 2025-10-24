@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
 
-const ListaProductos = ({ categoria = null }) => {
+const ListaProductos = ({ category = null }) => {
     const [productos, setProductos] = useState([]);
-    const [cargando, setCargando] = useEffect(true);
+    const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
         let url = "https://fakestoreapi.com/products";
 
-        if (categoria) {
-            url = "https://fakestoreapi.com/products/category/${category}"
-        }
+        if (category) {
+            url = `https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`
+        } console.log("URL que se va a fetch:", url);
 
         fetch(url).then((res) => res.json()).then((data) => {
             setProductos(data);
@@ -22,10 +22,10 @@ const ListaProductos = ({ categoria = null }) => {
                 console.error("Error al devolver data", error);
                 setCargando(false);
             });
-    }, [categoria]);
+    }, [category]);
 
     const handleAgregarAlCarrito = (producto) => {
-        alert(`Producto ${product.title} agregado al carrito`)
+        alert(`Producto ${producto.title} agregado al carrito`)
     };
 
     if (cargando) {
@@ -36,7 +36,7 @@ const ListaProductos = ({ categoria = null }) => {
         <Row>
             {productos.map((producto) => (
                 <Col md={4} key={producto.id} className="mb-4">
-                    <ProductCard product={producto} agregarAlCarrito={handleAgregarAlCarrito} />
+                    <ProductCard producto={producto} agregarAlCarrito={handleAgregarAlCarrito} />
                 </Col>
             ))}
         </Row>

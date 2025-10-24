@@ -17,10 +17,10 @@ export default function Header() {
                     <Nav.Link as={Link} to="/" className="me-3" style={{ color: "#C2C5AA" }}
                         onMouseEnter={e => e.currentTarget.style.color = "#fff"}
                         onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Home </Nav.Link>
-                    <Nav.Link as={Link} to="/" className="me-3" style={{ color: "#C2C5AA" }}
+                    <Nav.Link as={Link} to="/ofertas" className="me-3" style={{ color: "#C2C5AA" }}
                         onMouseEnter={e => e.currentTarget.style.color = "#fff"}
                         onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Ofertas </Nav.Link>
-                    <Nav.Link as={Link} to="/" className="me-3" style={{ color: "#C2C5AA" }}
+                    <Nav.Link as={Link} to="/productos" className="me-3" style={{ color: "#C2C5AA" }}
                         onMouseEnter={e => e.currentTarget.style.color = "#fff"}
                         onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Productos </Nav.Link>
                     <div className="d-flex align-items-center">
