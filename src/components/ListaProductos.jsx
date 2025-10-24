@@ -33,7 +33,7 @@ const ListaProductos = ({ category = null }) => {
     }
 
     return (
-        <Row>
+        <Row style={{ paddingTop: "50px" }}>
             {productos.map((producto) => (
                 <Col md={4} key={producto.id} className="mb-4">
                     <ProductCard producto={producto} agregarAlCarrito={handleAgregarAlCarrito} />

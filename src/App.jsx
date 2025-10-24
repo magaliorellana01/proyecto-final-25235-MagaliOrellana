@@ -12,15 +12,15 @@ function App() {
   return (
    <Router>
     <Header/>
-    <div style={{ backgroundColor: "#C2C5AA", minHeight: "100vh", padding: "20px 0" }}>
+    <div style={{ backgroundColor: "#C2C5AA", minHeight: "calc(100vh - 80px)", padding: "20px 0" }}>
     <Routes>
       <Route path="/micuenta" element={<Login />} />
       <Route path="/" element={<Home />} />
       <Route path="/ofertas" element={<Ofertas />} />
       <Route path="/productos" element={<Productos />} />
     </Routes>
-    <Footer/>
     </div>
+    <Footer/>
    </Router>
   )
 }
