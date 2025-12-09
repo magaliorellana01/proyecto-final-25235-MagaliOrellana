@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+// Link removed: no longer needed since 'Descubrir' button was removed
 import { useCart } from "../context/CartContext";
 import { toast } from 'react-toastify'; 
 
@@ -24,14 +24,7 @@ const ProductCard = ({ producto }) => {
         e.target.src = "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=500&auto=format&fit=crop"; 
     };
 
-    const mapCategoryToDisplay = (cat) => {
-        if (!cat) return 'Todas';
-        const c = cat.toString().toLowerCase();
-        if (c.includes('citr')) return 'Velas Cítricas';
-        if (c.includes('flor')) return 'Velas Florales';
-        if (c.includes('kit') || c.includes('set')) return 'Kits de Regalo';
-        return 'Todas';
-    };
+    // mapCategoryToDisplay removed: not needed when removing Discover button
 
     return (
         <Card className="h-100 d-flex flex-column shadow-sm border-0">
@@ -59,7 +52,7 @@ const ProductCard = ({ producto }) => {
                     ${producto.price}
                 </Card.Text>
                 
-                <div className="d-flex gap-2">
+                <div>
                     <Button
                         style={{
                             backgroundColor: "#333D29",
@@ -78,15 +71,6 @@ const ProductCard = ({ producto }) => {
                         onClick={handleAgregar}
                     >
                         Agregar al carrito
-                    </Button>
-
-                    <Button
-                        as={Link}
-                        to={`/productos?categoria=${encodeURIComponent(mapCategoryToDisplay(producto.category))}`}
-                        variant="outline-dark"
-                        style={{ borderColor: '#333D29', color: '#333D29' }}
-                    >
-                        Descubrir
                     </Button>
                 </div>
             </Card.Body>
