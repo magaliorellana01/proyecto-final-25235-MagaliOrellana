@@ -9,9 +9,19 @@ import { useAuth } from "../context/AuthContext";
 import { useSearch } from "../context/SearchContext";
 import { useCart } from "../context/CartContext";
 import logo from "../assets/logo.png";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-    const { query, handleSearch } = useSearch();
+    const { query, handleSearch, submitSearch } = useSearch();
+    const navigate = useNavigate();
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const applied = submitSearch();
+            if (applied) navigate('/productos');
+        }
+    };
     const { usuario, cerrarSesion } = useAuth();
     const { totalItems } = useCart();
 
@@ -44,6 +54,7 @@ export default function Header() {
                                 aria-label="Search"
                                 value={query}
                                 onChange={handleSearch}
+                                onKeyDown={onKeyDown}
                             />
                         </InputGroup>
                     </Form>

@@ -19,13 +19,24 @@ export const SearchProvider = ({ children }) => {
         }
     };
 
+    // Submit search explicitly (useful on Enter). Returns true if applied.
+    const submitSearch = (value) => {
+        const val = typeof value === 'string' ? value : query;
+        if (val && val.trim().length >= 4) {
+            setSearchTerm(val.trim());
+            return true;
+        }
+        // if not enough chars, do not apply
+        return false;
+    };
+
     const clearSearch = () => {
         setQuery("");
         setSearchTerm("");
     };
 
     return (
-        <SearchContext.Provider value={{ query, searchTerm, handleSearch, clearSearch }}>
+        <SearchContext.Provider value={{ query, searchTerm, handleSearch, clearSearch, submitSearch }}>
             {children}
         </SearchContext.Provider>
     );
