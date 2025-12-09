@@ -77,14 +77,16 @@ export default function Header() {
                             </Button>
                         )}
 
-                        <Link to="/carrito" className="position-relative text-white" aria-label="Ver carrito">
-                            <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
-                            {totalItems > 0 && (
-                                <Badge pill bg="danger" className="position-absolute" style={{ top: '-6px', right: '-8px' }}>
-                                    {totalItems}
-                                </Badge>
-                            )}
-                        </Link>
+                        {!(usuario && usuario.role === 'admin') && (
+                            <Link to="/carrito" className="position-relative text-white" aria-label="Ver carrito">
+                                <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
+                                {totalItems > 0 && (
+                                    <Badge pill bg="danger" className="position-absolute" style={{ top: '-6px', right: '-8px' }}>
+                                        {totalItems}
+                                    </Badge>
+                                )}
+                            </Link>
+                        )}
                     </div>
                 </Navbar.Collapse>
             </Container>
