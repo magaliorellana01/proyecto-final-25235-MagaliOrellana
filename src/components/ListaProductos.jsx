@@ -15,27 +15,48 @@ const ListaProductos = ({ categoria }) => {
         setPaginaActual(1);
     }, [searchTerm, categoria]);
 
-    // Lógica de filtrado más robusta
+    // Nota: la expresión anterior intenta usar Unicode normalization; como fallback
+    // usamos una versión segura que elimina diacríticos con el rango clásico.
+        // Normalizar texto para comparaciones (quita tildes y diferencia mayúsculas)
+        const safeNormalize = (str) => {
+            if (!str) return "";
+            try {
+                return String(str)
+                    .toLowerCase()
+                    .replace(/[áàäâã]/g, 'a')
+                    .replace(/[éèëê]/g, 'e')
+                    .replace(/[íìïî]/g, 'i')
+                    .replace(/[óòöôõ]/g, 'o')
+                    .replace(/[úùüû]/g, 'u')
+                    .replace(/[ñ]/g, 'n')
+                    .replace(/[ç]/g, 'c');
+            } catch (e) {
+                try { return String(str).toLowerCase(); } catch { return ""; }
+            }
+        };
+
     const synonymMap = {
-        "Velas Cítricas": ["citr", "cítr", "fresco"],
+        "Velas Cítricas": ["citr", "citric", "fresco"],
         "Velas Florales": ["flor"],
         "Kits de Regalo": ["kit", "set"]
     };
 
     const productosFiltrados = productos.filter((producto) => {
-        const searchMatch = producto.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const normalizedSearch = safeNormalize(searchTerm);
+        const nameNorm = safeNormalize(producto.name);
+        const searchMatch = !normalizedSearch || nameNorm.includes(normalizedSearch);
 
         const cat = categoria || "Todas";
-        const categoryValue = (producto.category || "").toString().toLowerCase();
+        const categoryValueNorm = safeNormalize(producto.category || "");
 
         let categoryMatch = true;
         if (cat && cat !== "Todas") {
             const syns = synonymMap[cat];
             if (syns && syns.length > 0) {
-                categoryMatch = syns.some(sub => categoryValue.includes(sub));
+                    categoryMatch = syns.some(sub => categoryValueNorm.includes(safeNormalize(sub)));
             } else {
-                // Fallback: comparar por texto
-                categoryMatch = categoryValue.includes(cat.toLowerCase());
+                // Fallback: comparar por texto normalizado
+                categoryMatch = categoryValueNorm.includes(safeNormalize(cat));
             }
         }
 
