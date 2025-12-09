@@ -41,7 +41,6 @@ export default function Header() {
                         <Nav.Link as={Link} to="/productos" className="mx-2">Productos</Nav.Link>
                     </Nav>
 
-                    {/* BARRA DE BÚSQUEDA */}
                     <Form className="d-flex me-3 my-2 my-lg-0">
                         <InputGroup>
                             <InputGroup.Text>

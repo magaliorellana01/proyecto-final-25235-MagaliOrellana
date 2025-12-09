@@ -1,13 +1,12 @@
-/* 1. Paleta de Colores y Variables de Bootstrap */
-:root {
-  /* Paleta personalizada */
-  --color-primary: #A2C5AA; /* Verde principal */
-  --color-secondary: #C4A7A7; /* Rosa empolvado, para acentos y enlaces */
-  --color-text: #4F4A4A;      /* Gris/marrón oscuro para texto */
-  --color-background: #F7F7F2; /* Blanco roto para fondos */
-  --color-borders: #E8E8E3;   /* Gris claro para bordes */
 
-  /* Sobrescribir variables de Bootstrap 5 */
+:root {
+  --color-primary: #A2C5AA; 
+  --color-secondary: #C4A7A7;
+  --color-text: #4F4A4A;      
+  --color-background: #F7F7F2;
+  --color-borders: #E8E8E3;  
+
+
   --bs-primary: var(--color-primary);
   --bs-primary-rgb: 162, 197, 170;
   --bs-secondary: var(--color-secondary);
@@ -21,7 +20,7 @@
   --bs-link-hover-color: var(--color-primary);
 }
 
-/* 2. Estilos Globales */
+
 body {
   margin: 0;
   font-family: var(--bs-font-family);
@@ -44,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-/* 3. Estilos de componentes */
+
 .card {
   border: 1px solid var(--color-borders);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -57,7 +56,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-custom-primary:hover {
-  background-color: #8AAE92; /* Darker green */
+  background-color: #8AAE92; 
   border-color: #8AAE92;
   color: #fff;
 }
@@ -73,13 +72,13 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-primary);
 }
 
-/* Agrego esto para asegurar que el footer tenga estilo si no usa clases de bootstrap */
+
 .site-footer {
-    background-color: #212529; /* Color dark de bootstrap por si acaso */
+    background-color: #212529;
     color: white;
 }
 
-/* Paginación Personalizada */
+
 .custom-pagination .page-link {
     color: var(--color-text);
     border-color: var(--color-borders);
