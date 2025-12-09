@@ -1,37 +1,81 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Navbar, Nav, Container, Button, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import logo from "../assets/logo.png"
-
+import Badge from 'react-bootstrap/Badge';
+import { FaSearch } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import { useSearch } from "../context/SearchContext";
+import { useCart } from "../context/CartContext";
+import logo from "../assets/logo.png";
 
 export default function Header() {
+    const { searchTerm, handleSearch } = useSearch();
+    const { usuario, cerrarSesion } = useAuth();
+    const { totalItems } = useCart();
+
     return (
-        <Navbar style={{ backgroundColor: "#333D29" }} variant="dark" expand="lg" className="mb-4">
+        <Navbar bg="dark" variant="dark" expand="lg" className="mb-4 sticky-top shadow-sm">
             <Container>
-                <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-                    <img src={logo} style={{ maxWidth: "100px", color: "#C2C5AA" }} />
+                <Navbar.Brand as={Link} to="/">
+                    <img src={logo} style={{ maxWidth: "100px" }} alt="Logo" />
                 </Navbar.Brand>
-                <Nav className="ms-auto align-items-center" >
-                    <Nav.Link as={Link} to="/" className="me-3" style={{ color: "#C2C5AA" }}
-                        onMouseEnter={e => e.currentTarget.style.color = "#fff"}
-                        onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Home </Nav.Link>
-                    <Nav.Link as={Link} to="/ofertas" className="me-3" style={{ color: "#C2C5AA" }}
-                        onMouseEnter={e => e.currentTarget.style.color = "#fff"}
-                        onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Ofertas </Nav.Link>
-                    <Nav.Link as={Link} to="/productos" className="me-3" style={{ color: "#C2C5AA" }}
-                        onMouseEnter={e => e.currentTarget.style.color = "#fff"}
-                        onMouseLeave={e => e.currentTarget.style.color = "#C2C5AA"}> Productos </Nav.Link>
-                    <div className="d-flex align-items-center">
-                        <Button variant="outline-light" as={Link} to="/micuenta" className="me-2" style={{ color: "#C2C5AA" }}  >
-                            Mi Cuenta
-                        </Button>
-                        <Link to="/carrito" className="text-white" >
-                            <FontAwesomeIcon icon={faShoppingCart} size="lg" style={{ color: "#C2C5AA" }}/>
+                
+                <Navbar.Toggle aria-controls="navbar-nav" />
+                
+                <Navbar.Collapse id="navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link as={Link} to="/" className="mx-2">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/ofertas" className="mx-2">Ofertas</Nav.Link>
+                        <Nav.Link as={Link} to="/productos" className="mx-2">Productos</Nav.Link>
+                    </Nav>
+
+                    {/* BARRA DE BÚSQUEDA */}
+                    <Form className="d-flex me-3 my-2 my-lg-0">
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FaSearch />
+                            </InputGroup.Text>
+                            <Form.Control
+                                type="search"
+                                placeholder="Buscar aroma..."
+                                className="me-2"
+                                aria-label="Search"
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                        </InputGroup>
+                    </Form>
+
+                    <div className="d-flex align-items-center mt-3 mt-lg-0">
+                        {usuario ? (
+                            <>
+                                {usuario.role === 'admin' && (
+                                    <Button as={Link} to="/admin" className="me-3 btn-sm btn-custom-primary">
+                                        Admin
+                                    </Button>
+                                )}
+                                <Button variant="outline-light" onClick={cerrarSesion} className="me-3 btn-sm">
+                                    Cerrar sesión
+                                </Button>
+                            </>
+                        ) : (
+                            <Button variant="outline-light" as={Link} to="/micuenta" className="me-3 btn-sm">
+                                Mi Cuenta
+                            </Button>
+                        )}
+
+                        <Link to="/carrito" className="position-relative text-white" aria-label="Ver carrito">
+                            <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
+                            {totalItems > 0 && (
+                                <Badge pill bg="danger" className="position-absolute" style={{ top: '-6px', right: '-8px' }}>
+                                    {totalItems}
+                                </Badge>
+                            )}
                         </Link>
                     </div>
-                </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );
