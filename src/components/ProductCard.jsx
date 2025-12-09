@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button } from 'react-bootstrap';
-// Link removed: no longer needed since 'Descubrir' button was removed
 import { useCart } from "../context/CartContext";
 import { toast } from 'react-toastify'; 
 
@@ -23,8 +22,6 @@ const ProductCard = ({ producto }) => {
     const handleImageError = (e) => {
         e.target.src = "https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=500&auto=format&fit=crop"; 
     };
-
-    // mapCategoryToDisplay removed: not needed when removing Discover button
 
     return (
         <Card className="h-100 d-flex flex-column shadow-sm border-0">

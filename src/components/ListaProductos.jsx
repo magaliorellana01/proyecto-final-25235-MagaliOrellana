@@ -15,9 +15,6 @@ const ListaProductos = ({ categoria }) => {
         setPaginaActual(1);
     }, [searchTerm, categoria]);
 
-    // Nota: la expresión anterior intenta usar Unicode normalization; como fallback
-    // usamos una versión segura que elimina diacríticos con el rango clásico.
-        // Normalizar texto para comparaciones (quita tildes y diferencia mayúsculas)
         const safeNormalize = (str) => {
             if (!str) return "";
             try {
@@ -55,7 +52,6 @@ const ListaProductos = ({ categoria }) => {
             if (syns && syns.length > 0) {
                     categoryMatch = syns.some(sub => categoryValueNorm.includes(safeNormalize(sub)));
             } else {
-                // Fallback: comparar por texto normalizado
                 categoryMatch = categoryValueNorm.includes(safeNormalize(cat));
             }
         }
@@ -63,7 +59,6 @@ const ListaProductos = ({ categoria }) => {
         return searchMatch && categoryMatch;
     });
 
-    // Lógica de paginación
     const indiceUltimoProducto = paginaActual * productosPorPagina;
     const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
     const productosActuales = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
@@ -71,7 +66,6 @@ const ListaProductos = ({ categoria }) => {
 
     const cambiarPagina = (numero) => setPaginaActual(numero);
 
-    // ESTADO DE CARGA
     if (cargando) {
         return (
             <div className="d-flex justify-content-center align-items-center py-5" style={{ minHeight: "300px" }}>

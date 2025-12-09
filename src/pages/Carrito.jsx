@@ -15,7 +15,7 @@ export default function Carrito() {
 
             {cart.length === 0 ? (
                 <div className="text-center py-5">
-                    <h4 className="text-muted">Tu carrito está vacío 🕯️</h4>
+                    <h4 className="text-muted">Tu carrito está vacío </h4>
                     <p>Explora nuestros productos y agrega lo que más te guste.</p>
                     <Button as={Link} to="/productos" variant="dark">Ver Productos</Button>
                 </div>

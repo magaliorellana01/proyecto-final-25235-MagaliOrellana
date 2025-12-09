@@ -10,7 +10,6 @@ export const CartProvider = ({ children }) => {
         if (!savedCart) return [];
         try {
             const parsed = JSON.parse(savedCart);
-            // Normalize stored items: ensure id and quantity
             return parsed.map(item => ({
                 ...item,
                 id: item.id ?? item.name,
@@ -36,7 +35,6 @@ export const CartProvider = ({ children }) => {
                     item.id === pid ? { ...item, quantity: item.quantity + 1 } : item
                 );
             } else {
-                // store a normalized product shape
                 const price = typeof product.price === 'number' ? product.price : Number(product.price || 0);
                 return [...prevCart, { ...product, id: pid, price, quantity: 1 }];
             }
