@@ -11,7 +11,7 @@ import { useCart } from "../context/CartContext";
 import logo from "../assets/logo.png";
 
 export default function Header() {
-    const { searchTerm, handleSearch } = useSearch();
+    const { query, handleSearch } = useSearch();
     const { usuario, cerrarSesion } = useAuth();
     const { totalItems } = useCart();
 
@@ -42,7 +42,7 @@ export default function Header() {
                                 placeholder="Buscar aroma..."
                                 className="me-2"
                                 aria-label="Search"
-                                value={searchTerm}
+                                value={query}
                                 onChange={handleSearch}
                             />
                         </InputGroup>

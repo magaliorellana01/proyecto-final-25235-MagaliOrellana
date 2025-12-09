@@ -5,12 +5,13 @@ const SearchContext = createContext();
 export const useSearch = () => useContext(SearchContext);
 
 export const SearchProvider = ({ children }) => {
+    const [query, setQuery] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = (e) => {
         const val = e.target.value || "";
-        // Only apply search when user typed at least 4 characters.
-        // If fewer than 4, clear the search to show all products.
+        setQuery(val);
+        // Only apply search filter when user typed at least 4 characters.
         if (val.trim().length >= 4) {
             setSearchTerm(val);
         } else {
@@ -18,8 +19,13 @@ export const SearchProvider = ({ children }) => {
         }
     };
 
+    const clearSearch = () => {
+        setQuery("");
+        setSearchTerm("");
+    };
+
     return (
-        <SearchContext.Provider value={{ searchTerm, handleSearch }}>
+        <SearchContext.Provider value={{ query, searchTerm, handleSearch, clearSearch }}>
             {children}
         </SearchContext.Provider>
     );
