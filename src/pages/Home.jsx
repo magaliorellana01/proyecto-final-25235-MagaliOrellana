@@ -5,30 +5,32 @@ import { Link } from 'react-router-dom';
 export default function Home() {
     return (
         <div>
-            <Carousel>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src="https://placehold.co/1200x400/DABFBF/4F4A4A?text=Velas+Artesanales"
-                        alt="Velas Artesanales"
-                    />
-                    <Carousel.Caption>
-                        <h3>Crea Momentos Únicos</h3>
-                        <p>Nuestras velas están hechas a mano con cera de soja natural.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src="https://placehold.co/1200x400/A2C5AA/4F4A4A?text=Nuevas+Fragancias"
-                        alt="Nuevas Fragancias"
-                    />
-                    <Carousel.Caption>
-                        <h3>Nuevas Fragancias de Temporada</h3>
-                        <p>Descubre los aromas que tenemos para ti este invierno.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+            <div className="d-none d-md-block">
+                <Carousel>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://placehold.co/1200x400/DABFBF/4F4A4A?text=Velas+Artesanales"
+                            alt="Velas Artesanales"
+                        />
+                        <Carousel.Caption>
+                            <h3>Crea Momentos Únicos</h3>
+                            <p>Nuestras velas están hechas a mano con cera de soja natural.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://placehold.co/1200x400/A2C5AA/4F4A4A?text=Nuevas+Fragancias"
+                            alt="Nuevas Fragancias"
+                        />
+                        <Carousel.Caption>
+                            <h3>Nuevas Fragancias de Temporada</h3>
+                            <p>Descubre los aromas que tenemos para ti este invierno.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
+            </div>
 
             <Container fluid className="p-5 mb-4 bg-light rounded-3 text-center">
                 <div className="container-fluid py-5">
